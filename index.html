@@ -10,12 +10,51 @@
   <!-- Google Fonts: Syne (display) + JetBrains Mono (mono accent) + DM Sans (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Fira+Code:wght@400;500;700&family=Fraunces:wght@400;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="boot.css" />
 </head>
 
 <body>
+
+  <!-- Boot Loader -->
+  <div id="boot">
+    <div class="boot-ring"></div>
+    <div class="boot-ring"></div>
+    <div class="boot-ring"></div>
+    <div class="boot-inner">
+      <div class="bl dim"  id="b0">PORTFOLIO OS v3.0 — BOOT SEQUENCE INITIATED...</div>
+      <div class="bl dim"  id="b1">SYSTEM CHECK: CPU ✓ &nbsp; RAM ✓ &nbsp; DISPLAY ✓</div>
+      <div class="bl ok"   id="b2">✓ THREAT DETECTION ENGINE ONLINE</div>
+      <div class="bl ok"   id="b3">✓ SIEM CONNECTORS ESTABLISHED</div>
+      <div class="bl ok"   id="b4">✓ THREAT INTELLIGENCE FEEDS ACTIVE</div>
+      <div class="bl ok"   id="b5">✓ INCIDENT RESPONSE PROTOCOLS LOADED</div>
+      <div class="bl warn" id="b6">⚠ 3 HIGH-SEVERITY ALERTS PENDING TRIAGE</div>
+      <div class="bl ok"   id="b7">✓ DETECTION RULES COMPILED [40+]</div>
+      <div class="bl ok"   id="b8">✓ CERTIFICATIONS VERIFIED [3 ACTIVE]</div>
+
+      <!-- Name -->
+      <div class="bl big"  id="b9">UDDEN <span class="hi">SHAKYA</span></div>
+      <!-- Role -->
+      <div class="bl role" id="b10">SOC ANALYST L1 &nbsp;·&nbsp; KATHMANDU, NEPAL</div>
+
+      <div class="boot-bar-wrap" id="bootBar">
+        <div class="boot-bar-top">
+          <span>LOADING PORTFOLIO</span>
+          <span id="bootPct">0%</span>
+        </div>
+        <div class="boot-bar-track">
+          <div class="boot-bar-fill" id="bootFill"></div>
+        </div>
+      </div>
+      <div class="boot-ready" id="bootReady">
+        SYSTEM READY — CLICK OR PRESS ANY KEY TO CONTINUE
+        <span class="boot-cursor"></span>
+      </div>
+    </div>
+    <div class="boot-skip" id="bootSkip">CLICK ANYWHERE TO SKIP</div>
+  </div>
 
   <!-- ===================== HEADER / NAV ===================== -->
   <header class="site-header" role="banner">
@@ -537,6 +576,7 @@
     </div>
   </footer>
 
+  <script src="boot.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
