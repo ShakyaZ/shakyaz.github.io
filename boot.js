@@ -16,7 +16,6 @@ if (ENABLED) {
     const fill = document.getElementById('bootFill');
     const pct = document.getElementById('bootPct');
     const ready = document.getElementById('bootReady');
-    const skip = document.getElementById('bootSkip');
 
     let progress = 0;
     let progressInterval;
@@ -28,8 +27,8 @@ if (ENABLED) {
       }
     }
 
-    // Show boot lines with staggered delays
-    const lineDelays = [0, 300, 600, 900, 1200, 1500, 1800, 2100, 2400, 2700, 3000];
+    // Show boot lines with faster staggered delays
+    const lineDelays = [0, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000];
     lines.forEach((line, i) => {
       setTimeout(() => showLine(i), lineDelays[i]);
     });
@@ -37,27 +36,27 @@ if (ENABLED) {
     // Show progress bar after lines start
     setTimeout(() => {
       if (barWrap) barWrap.classList.add('show');
-    }, 3200);
+    }, 1600);
 
     // Animate progress bar
     setTimeout(() => {
       progressInterval = setInterval(() => {
-        progress += 5;
+        progress += 20;
         if (fill) fill.style.width = progress + '%';
         if (pct) pct.textContent = progress + '%';
 
         if (progress >= 100) {
           clearInterval(progressInterval);
-          // Show ready prompt and skip hint
           setTimeout(() => {
             if (ready) ready.classList.add('show');
-            if (skip) skip.classList.add('show');
-          }, 500);
+            document.addEventListener('click', skipBoot, { once: true });
+            document.addEventListener('keydown', skipBoot, { once: true });
+          }, 200);
         }
-      }, 150);
-    }, 3500);
+      }, 80);
+    }, 1700);
 
-    // Function to skip/hide boot
+    // Function to hide boot
     function skipBoot() {
       if (progressInterval) clearInterval(progressInterval);
       boot.classList.add('out');
@@ -65,9 +64,5 @@ if (ENABLED) {
         boot.style.display = 'none';
       }, 850); // Match transition duration
     }
-
-    // Event listeners for skipping
-    document.addEventListener('click', skipBoot, { once: true });
-    document.addEventListener('keydown', skipBoot, { once: true });
   });
 }
