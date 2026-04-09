@@ -109,7 +109,7 @@
   width: 0;
   border-radius: 2px;
   background: linear-gradient(90deg, #00e5a0, #3b82f6, #5c636d);
-  transition: width 1.8s cubic-bezier(.4, 0, .2, 1);
+  transition: width .85s cubic-bezier(.4, 0, .2, 1);
 }
 
 /* ── READY PROMPT ── */
@@ -134,16 +134,3 @@
   border-radius: 1px;
 }
 @keyframes bc { 50% { opacity: 0; } }
-
-/* ── SKIP HINT ── */
-.boot-skip {
-  position: absolute;
-  bottom: 32px; right: 40px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .6rem;
-  color: #5c636d;
-  letter-spacing: 2px;
-  opacity: 0;
-  transition: opacity .4s;
-}
-.boot-skip.show { opacity: 1; }
