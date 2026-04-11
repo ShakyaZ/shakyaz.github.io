@@ -158,25 +158,24 @@ function initScrollReveal() {
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          // Stagger sibling reveals within the same parent container
-          const siblings = Array.from(
-            entry.target.parentElement?.querySelectorAll('.reveal') || []
-          );
-          const siblingIndex = siblings.indexOf(entry.target);
-          const delay = Math.min(siblingIndex * 60, 300); // Cap at 300ms stagger
+        // Stagger sibling reveals within the same parent container
+        const siblings = Array.from(
+          entry.target.parentElement?.querySelectorAll('.reveal') || []
+        );
+        const siblingIndex = siblings.indexOf(entry.target);
+        const delay = Math.min(siblingIndex * 60, 300); // Cap at 300ms stagger
 
+        if (entry.intersectionRatio >= 0.12) {
           setTimeout(() => {
             entry.target.classList.add('visible');
           }, delay);
-
-          // Once revealed, stop observing
-          observer.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove('visible');
         }
       });
     },
     {
-      threshold: 0.12,     // Trigger when 12% of the element is visible
+      threshold: [0, 0.12],     // Trigger when element enters or leaves the viewport
       rootMargin: '0px 0px -40px 0px', // Trigger slightly before bottom edge
     }
   );
