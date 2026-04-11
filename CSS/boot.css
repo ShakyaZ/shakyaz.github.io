@@ -1,0 +1,147 @@
+/*
+ * ═══════════════════════════════════════════
+ *  css/boot.css
+ *  Boot / loading screen.
+ *  To disable boot: in js/boot.js set ENABLED = false
+ * ═══════════════════════════════════════════
+ */
+
+#boot {
+  position: fixed; inset: 0;
+  z-index: 9000;
+  background-color: #0d0f12;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10vw;
+  overflow: hidden;
+  transition: opacity .85s ease;
+}
+#boot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.015) 2px,
+    rgba(0,0,0,0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+#boot.out { opacity: 0; pointer-events: none; }
+
+/* Decorative rings behind boot content */
+.boot-ring {
+  display: none;
+}
+
+.boot-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  width: 100%;
+}
+
+/* ── BOOT LINES ── */
+/* Start hidden; js/boot.js adds .show */
+.bl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .82rem;
+  letter-spacing: .3px;
+  color: #00e5a0;
+  margin-bottom: 9px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .3s ease, transform .3s ease;
+}
+.bl.show { opacity: 1; transform: translateY(0); }
+
+.bl.dim  { color: #5c636d; }
+.bl.ok   { color: #00e5a0; }
+.bl.warn { color: #f59e0b; }
+
+/* Large name line */
+.bl.big {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  letter-spacing: -1.5px;
+  line-height: 1;
+  color: #e8eaed;
+  margin-top: 26px;
+  margin-bottom: 8px;
+}
+.bl.big .hi { color: #00e5a0; }
+
+/* Role subtitle */
+.bl.role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .78rem;
+  color: #9aa0aa;
+  letter-spacing: 3px;
+  margin-bottom: 28px;
+}
+
+/* ── PROGRESS BAR ── */
+.boot-bar-wrap {
+  margin-top: 8px;
+  width: min(520px, 90%);
+  opacity: 0;
+  transition: opacity .35s;
+}
+.boot-bar-wrap.show { opacity: 1; }
+
+.boot-bar-top {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .65rem;
+  color: #5c636d;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.boot-bar-track {
+  height: 2px;
+  background: rgba(0, 229, 160, 0.12);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.boot-bar-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #00e5a0, #3b82f6, #5c636d);
+  transition: width .85s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* ── READY PROMPT ── */
+.boot-ready {
+  margin-top: 26px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  color: #00e5a0;
+  letter-spacing: 3px;
+  opacity: 0;
+  transition: opacity .35s;
+}
+.boot-ready.show { opacity: 1; }
+
+.boot-cursor {
+  display: inline-block;
+  width: 8px; height: .85em;
+  background: #00e5a0;
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: bc 1s step-end infinite;
+  border-radius: 1px;
+}
+@keyframes bc { 50% { opacity: 0; } }
